@@ -8,6 +8,37 @@
 ## the result is cached. If a prior cached result is found the cached 
 ## result is returned.
 
+## Test Cases / Results
+## Test 2 - 2x2 matrix
+## > a = matrix(c(1,-1,1,2),nrow=2,ncol=2)
+## > a
+##       [,1] [,2]
+## [1,]    1    1
+## [2,]   -1    2
+##
+##  > myMatrix <- makeCacheMatrix(a)    ## create special matrix
+##  > cacheSolve(myMatrix)
+##
+##          [,1]       [,2]
+##  [1,] 0.6666667 -0.3333333
+##  [2,] 0.3333333  0.3333333
+##
+## Test 2 - 3x3 matrix
+## > a = matrix(c(1,2,-4,3,-2,1,0,1,-1),nrow=3,ncol=3)
+## > a
+##        [,1] [,2] [,3]
+##   [1,]    1    3    0
+##   [2,]    2   -2    1
+##   [3,]   -4    1   -1
+##
+##  > myMatrix <- makeCacheMatrix(a)    ## create special matrix
+##  > cacheSolve(myMatrix)
+##
+##       [,1] [,2] [,3]
+##  [1,] -0.2 -0.6 -0.6
+##  [2,]  0.4  0.2  0.2
+##  [3,]  1.2  2.6  1.6
+
 makeCacheMatrix <- function(x = matrix()) {
   m <- NULL
   set <- function(y) {
