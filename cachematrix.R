@@ -45,32 +45,6 @@ cacheSolve <- function(x, ...) {
   m
 }
 
-makeVector <- function(x = numeric()) {
-  m <- NULL
-  set <- function(y) {
-    x <<- y
-    m <<- NULL
-  }
-  get <- function() x
-  setmean <- function(mean) m <<- mean
-  getmean <- function() m
-  list(set = set, get = get,
-       setmean = setmean,
-       getmean = getmean)
-}
-
-cachemean <- function(x, ...) {
-  m <- x$getmean()
-  if(!is.null(m)) {
-    message("getting cached data")
-    return(m)
-  }
-  data <- x$get()
-  m <- mean(data, ...)
-  x$setmean(m)
-  m
-}
-
 ## Test Cases / Results
 ##
 ## Test 1 - 2x2 matrix
@@ -93,7 +67,7 @@ cachemean <- function(x, ...) {
 ## [1,]    1    1
 ## [2,]   -1    2
 ##
-##  > myMatrix <- makeCacheMatrix(a)    ## create special matrix
+##  > myMatrix <- makeCacheMatrix(a)
 ##  > cacheSolve(myMatrix)
 ##
 ##          [,1]       [,2]
@@ -108,7 +82,7 @@ cachemean <- function(x, ...) {
 ##   [2,]    2   -2    1
 ##   [3,]   -4    1   -1
 ##
-##  > myMatrix <- makeCacheMatrix(a)    ## create special matrix
+##  > myMatrix <- makeCacheMatrix(a)
 ##  > cacheSolve(myMatrix)
 ##
 ##       [,1] [,2] [,3]
