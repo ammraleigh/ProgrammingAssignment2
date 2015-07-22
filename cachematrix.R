@@ -1,15 +1,13 @@
-## Create and retrieve the cache of an matrix inverse operation
-## The matrix inverse computation is costly. These functions allow
-## the data to be store (cached) locally using makeCacheMatrix and
-## retrieved using cacheSolve.  
+## Store input/output from the resource intensive matrix inverse 
+## operation in a local cache to speed up processing times.
 
-## makeCacheMatrix creates a special vector which is really a list 
-## containing a function to:
+## makeCacheMatrix creates a special vector which is a list 
+## containing functions to:
 ## 
-##  - set the value of the vector
-##  - get the value of the vector
-##  - set the value of the mean
-##  - get the value of the mean
+##  - set the value of the matrix
+##  - get the value of the matrix
+##  - set the value of the solve(matrix)
+##  - get the value of the solve(matrix)
 
 makeCacheMatrix <- function(x = matrix()) {
   m <- NULL
@@ -28,10 +26,10 @@ makeCacheMatrix <- function(x = matrix()) {
 
 ## cacheSolve takes as input the special vector created by makeCacheMatrix
 ## The cacheSolve function then :
-##    - checks if the results for the given matrix have already been cached
-##    - if so then the cached data is output on the console & the function returns
+##    - checks if the solve result for the given matrix has already been cached
+##    - if so then the cached result is output on the console & the function returns
 ##    - if not then the new input matrix is retrieved
-##    - then the solve operator is applied to the new matrix and a result is cached
+##    - and the solve operator is applied to the new matrix and a result is cached
 ##    - Lastly, the solve result is output to the console
 
 cacheSolve <- function(x, ...) {
