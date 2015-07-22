@@ -1,14 +1,19 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Create and retrieve the cache of an matrix inverse operation
+## The matrix inverse computation is costly. These functions allow
+## the data to be store (cached) locally using makeCacheMatrix and
+## retrieve using cacheSolve.  
 
-## Write a short comment describing this function
+## makeCacheMatrix checks if the contents have changed. If so the
+## contents are recalculated and cached locally
 
 makeCacheMatrix <- function(x = matrix()) {
 
 }
 
 
-## Write a short comment describing this function
+## cacheSolve checks if the contents have already been calculated
+## and cached. If so the cached content is returned. If the content
+## is not found then the matrix inverse operation is performed
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
