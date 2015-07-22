@@ -1,43 +1,15 @@
 ## Create and retrieve the cache of an matrix inverse operation
 ## The matrix inverse computation is costly. These functions allow
 ## the data to be store (cached) locally using makeCacheMatrix and
-## retrieve using cacheSolve.  
+## retrieved using cacheSolve.  
 
-## makeCacheMatrix checks if the matrix inverse operation has already
-## been performed and cached. If not the operation is performed and
-## the result is cached. If a prior cached result is found the cached 
-## result is returned.
-
-## Test Cases / Results
-## Test 2 - 2x2 matrix
-## > a = matrix(c(1,-1,1,2),nrow=2,ncol=2)
-## > a
-##       [,1] [,2]
-## [1,]    1    1
-## [2,]   -1    2
-##
-##  > myMatrix <- makeCacheMatrix(a)    ## create special matrix
-##  > cacheSolve(myMatrix)
-##
-##          [,1]       [,2]
-##  [1,] 0.6666667 -0.3333333
-##  [2,] 0.3333333  0.3333333
-##
-## Test 2 - 3x3 matrix
-## > a = matrix(c(1,2,-4,3,-2,1,0,1,-1),nrow=3,ncol=3)
-## > a
-##        [,1] [,2] [,3]
-##   [1,]    1    3    0
-##   [2,]    2   -2    1
-##   [3,]   -4    1   -1
-##
-##  > myMatrix <- makeCacheMatrix(a)    ## create special matrix
-##  > cacheSolve(myMatrix)
-##
-##       [,1] [,2] [,3]
-##  [1,] -0.2 -0.6 -0.6
-##  [2,]  0.4  0.2  0.2
-##  [3,]  1.2  2.6  1.6
+## makeCacheMatrix creates a special vector which is really a list 
+## containing a function to:
+## 
+##  - set the value of the vector
+##  - get the value of the vector
+##  - set the value of the mean
+##  - get the value of the mean
 
 makeCacheMatrix <- function(x = matrix()) {
   m <- NULL
@@ -54,10 +26,13 @@ makeCacheMatrix <- function(x = matrix()) {
 
 }
 
-
-## cacheSolve checks if the contents have already been calculated
-## and cached. If so the cached content is returned. If the content
-## is not found then the matrix inverse operation is performed
+## cacheSolve takes as input the special vector created by makeCacheMatrix
+## The cacheSolve function then :
+##    - checks if the results for the given matrix have already been cached
+##    - if so then the cached data is output on the console & the function returns
+##    - if not then the new input matrix is retrieved
+##    - then the solve operator is applied to the new matrix and a result is cached
+##    - Lastly, the solve result is output to the console
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
@@ -97,5 +72,51 @@ cachemean <- function(x, ...) {
   x$setmean(m)
   m
 }
+
+## Test Cases / Results
+##
+## Test 1 - 2x2 matrix
+## > a = matrix(c(2,2,3,2),nrow=2, ncol=2)
+## > a
+##       [,1] [,2]
+## [1,]    2    3
+## [2,]    2    2
+##
+## > myMatrix <- makeCacheMatrix(a)
+## > cacheSolve(myMatrix)
+##       [,1] [,2]
+## [1,]   -1  1.5
+## [2,]    1 -1.0
+##
+## Test 2 - 2x2 matrix
+## > a = matrix(c(1,-1,1,2),nrow=2,ncol=2)
+## > a
+##       [,1] [,2]
+## [1,]    1    1
+## [2,]   -1    2
+##
+##  > myMatrix <- makeCacheMatrix(a)    ## create special matrix
+##  > cacheSolve(myMatrix)
+##
+##          [,1]       [,2]
+##  [1,] 0.6666667 -0.3333333
+##  [2,] 0.3333333  0.3333333
+##
+## Test 3 - 3x3 matrix
+## > a = matrix(c(1,2,-4,3,-2,1,0,1,-1),nrow=3,ncol=3)
+## > a
+##        [,1] [,2] [,3]
+##   [1,]    1    3    0
+##   [2,]    2   -2    1
+##   [3,]   -4    1   -1
+##
+##  > myMatrix <- makeCacheMatrix(a)    ## create special matrix
+##  > cacheSolve(myMatrix)
+##
+##       [,1] [,2] [,3]
+##  [1,] -0.2 -0.6 -0.6
+##  [2,]  0.4  0.2  0.2
+##  [3,]  1.2  2.6  1.6
+
 
 
